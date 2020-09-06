@@ -1,5 +1,23 @@
 # Neo4j CSV importer
-This is a repository containing python batch to import csv data into neo4j database.
+This is a repository containing python shell to import csv data into neo4j database.
+You can import both Nodes and Relationships.
+You don't need to write any Cypher script at all.
+
+# What is can do
+
+## Importing Nodes
+- This shell automatically detects the types of properties.
+- You can choose skipping or updating if nodes already exist.
+- You can choose Node labels row by row. Multiple labels are supported.
+- You can set labels as your importing file name too.
+
+## Importing Relationships
+- This shell automatically detects the types of properties.
+- You can choose skipping or updating if relationship already exists.
+- You can choose if you want to create nodes at the same time.
+- You can choose Relationship type row by row.
+- You can set type as your importing file name too.
+
 
 # Prepare CSV Data
 
