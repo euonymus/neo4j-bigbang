@@ -3,7 +3,7 @@ This is a repository containing python shell to import csv data into neo4j datab
 You can import both Nodes and Relationships.
 You don't need to write any Cypher script at all.
 
-# What is can do
+# What it can do
 
 ## Importing Nodes
 - This shell automatically detects the types of properties.
