@@ -1,0 +1,7 @@
+.env
+.DS_Store
+.pytest_cache
+__pycache__
+importing/nodes.csv
+importing/relationships.csv
+

@@ -1,0 +1,7 @@
+labels,name_ja,description_ja,image_path,start,end,start_accuracy,end_accuracy,is_momentary,url
+Hoge|Hage,import-test1,,,,,,,,
+Hoge|Hage,import-test2,description2,https://test-image2.com,1200-02-20,1201-02-20,year,year,FALSE,https://test2.com
+Hoge|Hage,import-test3,description3,https://test-image3.com,1300-02-20,1301-02-20,mont,month,FALSE,https://test3.com
+Hoge|Hage,import-test4,description4,https://test-image4.com,1400-02-20,,month,,TRUE,https://test4.com
+Hoge|Hage,import-test5,description5,https://test-image5.com,1500-02-20,,year,,FALSE,https://test5.com
+Hoge|Hage,import-test6,description6,https://test-image6.com,,1601-02-20,,month,FALSE,https://test6.com

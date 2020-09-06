@@ -1,0 +1,7 @@
+type,target_fields_in,target_values_in,target_fields_out,target_values_out,directed,relation_ja,prefix_ja,suffix_ja,start,end,start_accuracy,end_accuracy,is_momentary,target_labels_in,target_labels_out
+IN_ROW_TYPE,name_ja,import-test1,name_ja,import-test2,TRUE,関係1,,,,,,,,,
+IN_ROW_TYPE,name_ja,import-test2,name_ja,import-test3,FALSE,関係2,プレフィックス1,サフィックス1,1200-02-20,1201-02-20,year,year,FALSE,In_Label|InIn,Out_Label|OutOut
+IN_ROW_TYPE,name_ja,import-test3,name_ja,import-test4,FALSE,関係3,プレフィックス2,,1300-02-20,1301-02-20,mont,month,FALSE,In_Label|InIn,Out_Label|OutOut
+IN_ROW_TYPE,name_ja|description_ja,import-test4|description4,name_ja,import-test5,TRUE,関係4,,サフィックス3,1400-02-20,,month,,TRUE,In_Label|InIn,Out_Label|OutOut
+IN_ROW_TYPE,name_ja,import-test5,name_ja,import-test6,TRUE,関係5,プレフィックス4,サフィックス4,1500-02-20,,year,,FALSE,In_Label|InIn,Out_Label|OutOut
+IN_ROW_TYPE,name_ja,import-test6,name_ja,import-test7,TRUE,関係6,プレフィックス5,サフィックス5,,1601-02-20,,month,FALSE,In_Label|InIn,Out_Label|OutOut
