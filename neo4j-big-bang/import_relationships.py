@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
+import sys
 import load_dot_env
 from usecases.import_relationships import ImportRelationships, ACTION_TYPE_SKIP, ACTION_TYPE_UPDATE
 
 DEFAULT_FILE_NAME = 'relationships.csv'
-if __name__ == '__main__':
-    import sys
+def main(args = sys.argv):
 
     action_type = ACTION_TYPE_SKIP
     file_name = DEFAULT_FILE_NAME
     type_in_row = True
     create_node = False
-
-    args = sys.argv
 
     # Update or Skip
     if '-u' in args:
@@ -37,3 +35,6 @@ if __name__ == '__main__':
 
     import_relationships = ImportRelationships(file_name, type_in_row, create_node)
     import_relationships.invoke(action_type)
+
+if __name__ == '__main__':
+    main()

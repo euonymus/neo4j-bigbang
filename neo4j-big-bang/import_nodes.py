@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
+import sys
 import load_dot_env
 from usecases.import_nodes import ImportNodes, ACTION_TYPE_SKIP, ACTION_TYPE_UPDATE
 
 DEFAULT_FILE_NAME = 'nodes.csv'
-if __name__ == '__main__':
-    import sys
+def main(args = sys.argv):
 
     action_type = ACTION_TYPE_SKIP
     file_name = DEFAULT_FILE_NAME
     labels_in_row = True
     unique_labels = None
     unique_property_keys = None
-
-    args = sys.argv
 
     # Update or Skip
     if '-u' in args:
@@ -53,3 +51,6 @@ if __name__ == '__main__':
 
     import_nodes = ImportNodes(file_name, labels_in_row, unique_labels, unique_property_keys)
     import_nodes.invoke(action_type)
+
+if __name__ == '__main__':
+    main()
