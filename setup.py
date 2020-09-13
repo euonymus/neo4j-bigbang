@@ -8,7 +8,7 @@ with open('requirements.txt') as requirements_file:
 
 setuptools.setup(
     name="neo4j-big-bang-test", # Replace with your own username
-    version="0.0.1",
+    version="0.0.2",
     author="euonymus",
     author_email="euonymus0220@gmail.com",
     description="This is a library allow you to import csv data into neo4j database",

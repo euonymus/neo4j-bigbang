@@ -1,5 +1,5 @@
 # Neo4j Big Bang the CSV importer for Neo4j
-This is a python shell to import csv data into neo4j database.
+This is a python package to import csv data into neo4j database.
 You can import both Nodes and Relationships.
 You don't need to write any Cypher script at all.
 
@@ -19,18 +19,42 @@ You don't need to write any Cypher script at all.
 - You can set type as your importing file name too.
 
 
-# Prepare CSV Data
+# Getting Started
+
+## Install this package
+
+```
+$ pip install neo4j-big-bang
+```
+
+## Prepare CSV Data
 
 Put your importing CSV file under `importing` directory
 
+## Run command with environment variables
 
-# Getting Started
+```
+NEO4J_URI=bolt://localhost:7687 NEO4J_USER=neo4j NEO4J_PASSWORD={your-password} big-bang-node
+```
+
+
+# Getting Started from source
 
 ```bash
 $ cd [path to this repo]
 $ python -m venv .env
 $ source .env/bin/activate
 $ pip install -r requirements.txt
+```
+
+Setup your .env file under `neo4j_big_bang` directory
+
+
+/neo4j_big_bang/.env
+```
+NEO4J_URI='bolt://localhost:7687'
+NEO4J_USER='neo4j'
+NEO4J_PASSWORD='password'
 ```
 
 # Import Nodes from CSV
