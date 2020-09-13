@@ -16,11 +16,11 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/euonymus/neo4j-big-bang",
     packages=setuptools.find_packages(),
-    install_requires=install_requirements(),
+    install_requires=install_requirements,
     entry_points={
         "console_scripts": [
-            "big-bang-node=neo4j-big-bang.import_nodes:main",
-            "big-bang-rel=neo4j-big-bang.import_relationships:main",
+            "big-bang-node=neo4j_big_bang.import_nodes:main",
+            "big-bang-rel=neo4j_big_bang.import_relationships:main",
         ]
     },
     classifiers=[
