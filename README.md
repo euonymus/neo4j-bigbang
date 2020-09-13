@@ -1,5 +1,5 @@
-# Neo4j CSV importer
-This is a repository containing python shell to import csv data into neo4j database.
+# Neo4j Big Bang the CSV importer for Neo4j
+This is a python shell to import csv data into neo4j database.
 You can import both Nodes and Relationships.
 You don't need to write any Cypher script at all.
 
