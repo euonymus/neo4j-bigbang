@@ -1,7 +1,17 @@
-.env
-.DS_Store
-.pytest_cache
-__pycache__
 importing/nodes.csv
 importing/relationships.csv
 
+.DS_Store
+.env
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Distribution / packaging
+build/ 
+dist/ 
+*.egg-info/ 
+*.egg
+
+# Unit test / coverage reports
+.pytest_cache/

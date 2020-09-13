@@ -38,16 +38,16 @@ $ pip install -r requirements.txt
 Run
 
 ```bash
-$ python src/import_nodes.py
+$ python neo4j-big-bang/import_nodes.py
 
 # Case 1: Use Labels from file name Person|Employee.csv
-$ python src/import_nodes.py -n Person|Employee.csv -f
+$ python neo4j-big-bang/import_nodes.py -n Person|Employee.csv -f
 
 # Case 2: Update if target node already exists
-$ python src/import_nodes.py -n Person|Employee.csv -f -l Person|Teacher -p name|employee_id -u
+$ python neo4j-big-bang/import_nodes.py -n Person|Employee.csv -f -l Person|Teacher -p name|employee_id -u
 
 # Case 3: Skip if target node already exists
-$ python src/import_nodes.py -n Person|Employee.csv -f -l Person|Teacher -p name|employee_id
+$ python neo4j-big-bang/import_nodes.py -n Person|Employee.csv -f -l Person|Teacher -p name|employee_id
 ```
 
 Options
@@ -64,16 +64,16 @@ Options
 Run
 
 ```bash
-$ python src/import_relationships.py
+$ python neo4j-big-bang/import_relationships.py
 
 # Case 1: Use Type from file name YOUR_RELATION_TYPE.csv
-$ python src/import_relationships.py -n YOUR_RELATION_TYPE.csv -f
+$ python neo4j-big-bang/import_relationships.py -n YOUR_RELATION_TYPE.csv -f
 
 # Case 2: Update if same type relationship already exists
-$ python src/import_relationships.py -u
+$ python neo4j-big-bang/import_relationships.py -u
 
 # Case 3: Create relationship and nodes at once, even though nodes does not exist
-$ python src/import_relationships.py -c
+$ python neo4j-big-bang/import_relationships.py -c
 ```
 
 Options
