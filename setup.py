@@ -7,7 +7,7 @@ with open('requirements.txt') as requirements_file:
     install_requirements = requirements_file.read().splitlines()
 
 setuptools.setup(
-    name="neo4j-big-bang-euonymus", # Replace with your own username
+    name="neo4j-big-bang", # Replace with your own username
     version="0.0.1",
     author="euonymus",
     author_email="euonymus0220@gmail.com",
