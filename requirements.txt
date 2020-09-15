@@ -1,5 +1,5 @@
-neo4j
-pandas
-python-dotenv
-pytest
-pytest-mock
+neo4j>=4.1.1
+pandas>=1.1.2
+python-dotenv>=0.14.0
+pytest>=6.0.2
+pytest-mock>=3.3.1
