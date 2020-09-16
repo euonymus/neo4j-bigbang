@@ -24,7 +24,7 @@ You don't need to write any Cypher script at all.
 ## Install this package
 
 ```
-$ pip install neo4j-big-bang
+$ pip install neo4j-bigbang
 ```
 
 ## Prepare CSV Data
@@ -34,7 +34,7 @@ Put your importing CSV file under `importing` directory
 ## Run command with environment variables
 
 ```
-NEO4J_URI=bolt://localhost:7687 NEO4J_USER=neo4j NEO4J_PASSWORD={your-password} big-bang-node
+NEO4J_URI=bolt://localhost:7687 NEO4J_USER=neo4j NEO4J_PASSWORD={your-password} bigbang-node
 ```
 
 
