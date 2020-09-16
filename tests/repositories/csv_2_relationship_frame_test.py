@@ -15,7 +15,7 @@ SAMPLE_CSV_DATA_PATH_IN_ROW = 'tests/data/relationship_type_in_row.csv'
 def test_to_entity(rel_type, properties, expected):
     df = pd.DataFrame(properties, columns=['target_fields_in', 'target_values_in', 'target_fields_out', 'target_values_out', 'directed', 'col1', 'col2', 'col3'])
 
-    row = df.iloc[0]
+    row = df.iloc[0].copy()
     # You need to cast integer, because it's originally numpy.int64
     row['col1'] = int(row['col1'])
     result = Csv2RelationshipFrame.to_entity(row, rel_type)

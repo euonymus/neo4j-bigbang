@@ -15,7 +15,7 @@ SAMPLE_CSV_DATA_PATH_IN_ROW = 'tests/data/in_row.csv'
 def test_to_entity(labels, properties, expected):
     df = pd.DataFrame(properties, columns=['col1', 'col2', 'col3'])
 
-    row = df.iloc[0]
+    row = df.iloc[0].copy()
     # You need to cast integer, because it's originally numpy.int64
     row['col1'] = int(row['col1'])
     result = Csv2Node.to_entity(row, labels)
