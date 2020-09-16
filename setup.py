@@ -19,8 +19,8 @@ setuptools.setup(
     install_requires=install_requirements,
     entry_points={
         "console_scripts": [
-            "big-bang-node=bigbang.import_nodes:main",
-            "big-bang-rel=bigbang.import_relationships:main",
+            "bigbang-node=bigbang.import_nodes:main",
+            "bigbang-rel=bigbang.import_relationships:main",
         ]
     },
     classifiers=[
