@@ -7,20 +7,20 @@ with open('requirements.txt') as requirements_file:
     install_requirements = requirements_file.read().splitlines()
 
 setuptools.setup(
-    name="neo4j-big-bang-test", # Replace with your own username
-    version="0.0.3",
+    name="neo4j-bigbang-test", # Replace with your own username
+    version="0.0.1",
     author="euonymus",
     author_email="euonymus0220@gmail.com",
     description="This is a library allow you to import csv data into neo4j database",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/euonymus/neo4j-big-bang",
+    url="https://github.com/euonymus/neo4j-bigbang",
     packages=setuptools.find_packages(),
     install_requires=install_requirements,
     entry_points={
         "console_scripts": [
-            "big-bang-node=neo4j_big_bang.import_nodes:main",
-            "big-bang-rel=neo4j_big_bang.import_relationships:main",
+            "big-bang-node=bigbang.import_nodes:main",
+            "big-bang-rel=bigbang.import_relationships:main",
         ]
     },
     classifiers=[
