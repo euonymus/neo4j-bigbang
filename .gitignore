@@ -2,6 +2,7 @@ importing/nodes.csv
 importing/relationships.csv
 
 .DS_Store
+venv
 .env
 
 # Byte-compiled / optimized / DLL files
