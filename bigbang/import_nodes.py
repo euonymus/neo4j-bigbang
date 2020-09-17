@@ -49,8 +49,11 @@ def main(args = sys.argv):
         property_keys = args[i + 1]
         unique_property_keys = property_keys.split('|')
 
-    import_nodes = ImportNodes(file_name, labels_in_row, unique_labels, unique_property_keys)
-    import_nodes.invoke(action_type)
+    try:
+        import_nodes = ImportNodes(file_name, labels_in_row, unique_labels, unique_property_keys)
+        import_nodes.invoke(action_type)
+    except Exception as e:
+        print(e)
 
 if __name__ == '__main__':
     main()

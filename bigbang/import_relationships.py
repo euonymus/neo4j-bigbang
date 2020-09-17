@@ -33,8 +33,11 @@ def main(args = sys.argv):
         i = args.index('-c')
         create_node = True
 
-    import_relationships = ImportRelationships(file_name, type_in_row, create_node)
-    import_relationships.invoke(action_type)
+    try:
+        import_relationships = ImportRelationships(file_name, type_in_row, create_node)
+        import_relationships.invoke(action_type)
+    except Exception as e:
+        print(e)
 
 if __name__ == '__main__':
     main()
