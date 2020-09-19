@@ -70,8 +70,14 @@ $ python src/bigbang/import_nodes.py -n Person|Employee.csv -f
 # Case 2: Update if target node already exists
 $ python src/bigbang/import_nodes.py -n Person|Employee.csv -f -l Person|Teacher -p name|employee_id -u
 
+# Case 2': Update if target node already exists ( labels should be on CSV )
+$ python src/bigbang/import_nodes.py -n Person|Employee.csv -f -l -p name|employee_id -u
+
 # Case 3: Skip if target node already exists
 $ python src/bigbang/import_nodes.py -n Person|Employee.csv -f -l Person|Teacher -p name|employee_id
+
+# Case 3': Skip if target node already exists ( labels should be on CSV )
+$ python src/bigbang/import_nodes.py -n Person|Employee.csv -f -l -p name|employee_id
 ```
 
 Options
@@ -79,8 +85,9 @@ Options
 - `-u` : If set, update node when it exists. ( both -l and -p are required )
 - `-n` : Specify CSV file name. Its' required when you set `-f`
 - `-f` : Set if you want to use file name as labels. If not set, labels field is required in the CSV file
-- `-l` : Unique Labels. Its' required when you set `-u`
-- `-p` : Unique Properties. Its' required when you set `-u`
+- `-l` : If set, labels on CSV will be targeted if already in Neo4j. Its' required when you set `-u`
+- `-l` with `specified labels` : If set, specified labels will be targeted if already in Neo4j. Its' required when you set `-u`
+- `-p` with `specified labels`: Unique Properties. Its' required when you set `-u`
 
 
 # Import Relationships from CSV
