@@ -8,14 +8,18 @@ with open('requirements.txt') as requirements_file:
 
 setuptools.setup(
     name="neo4j-bigbang",
-    version="0.0.3",
+    version="0.0.4",
     author="euonymus",
     author_email="euonymus0220@gmail.com",
     description="This is a library allows you to import csv data into neo4j database",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/euonymus/neo4j-bigbang",
-    packages=setuptools.find_packages(),
+    package_dir={"": "src"},
+    packages=setuptools.find_packages(
+        where="src",
+        exclude=["tests*"],
+    ),
     install_requires=install_requirements,
     entry_points={
         "console_scripts": [

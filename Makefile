@@ -4,7 +4,7 @@ BASE := $(shell /bin/pwd)
 
 # Local Env for Developer
 reset:
-	rm -rf build dist *.egg-info venv
+	rm -rf build dist src/*.egg-info venv
 
 init:
 	python -m venv $(BASE)/venv
