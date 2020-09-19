@@ -52,7 +52,7 @@ class ImportRelationships():
     def action(self, relationship, action_type):
         existing = self.relationship_repository.find_one(relationship)
         if existing and action_type == ACTION_TYPE_SKIP:
-            print('Importing is skipped because the relationship exists in neo4j.')
+            print('[Skip the Row] The relationship already exists in neo4j.')
             return existing
 
         return self.relationship_repository.save(relationship)

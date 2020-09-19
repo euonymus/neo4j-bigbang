@@ -11,7 +11,7 @@ class Neo4jPropertyStr(Neo4jProperty):
     # Run Time Converter
     ###################################################
     def enstring_by_type(self):
-        return '"%s"' % self.value
+        return '"%s"' % self.value.replace('"', '\\"')
 
     ###################################################
     # Converter
