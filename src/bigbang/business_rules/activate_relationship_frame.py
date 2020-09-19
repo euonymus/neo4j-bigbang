@@ -41,9 +41,11 @@ class ActivateRelationship():
 
         node1 = self.search_and_convert_target_into_node(self.relationship_frame.target_fields_in, self.relationship_frame.target_values_in, labels_in)
         if not node1:
+            print('[Skip the Row] Target IN-Node is not found ')
             return False
         node2 = self.search_and_convert_target_into_node(self.relationship_frame.target_fields_out, self.relationship_frame.target_values_out, labels_out)
         if not node2:
+            print('[Skip the Row] Target OUT-Node is not found ')
             return False
 
         rel_type = self.relationship_frame.type
