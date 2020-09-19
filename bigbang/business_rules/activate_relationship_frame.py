@@ -67,7 +67,9 @@ class ActivateRelationship():
 
         properties = neo4j_properties(tmp_properties)
         node_repository = NodeRepository()
-        nodes = node_repository.find_by([], properties)
+        # MEMO: Below line is not tested.
+        # nodes = node_repository.find_by([], properties)
+        nodes = node_repository.find_by(labels, properties)
         # MEMO: Relationship entity takes exactry one nodes in each sides of in and out.
         if len(nodes) == 1:
             return nodes[0]
