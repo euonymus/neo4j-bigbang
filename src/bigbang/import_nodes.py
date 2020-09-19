@@ -30,14 +30,19 @@ def main(args = sys.argv):
             labels_in_row = False
 
     # unique labels
+    # If labels are specified, those are the targeted labels. ( It's used if you want to update labels on targeted Nodes )
+    # If no labels are specified, labels in CSV will be targeted.
     if '-l' in args:
         i = args.index('-l')
         if len(args) <= i + 1:
-            raise AttributeError('Unique labels are required.')
-        if args[i + 1].startswith('-'):
-            raise AttributeError('Unique labels are required.')
-        labels = args[i + 1]
-        unique_labels = labels.split('|')
+            # raise AttributeError('Unique labels are required.')
+            unique_labels = True
+        elif args[i + 1].startswith('-'):
+            # raise AttributeError('Unique labels are required.')
+            unique_labels = True
+        else:
+            labels = args[i + 1]
+            unique_labels = labels.split('|')
 
     # unique property keys
     if '-p' in args:
