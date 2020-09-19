@@ -10,15 +10,6 @@ APPEAR_IN,name,Deus Ex Machina,Character|HardwareInterface,name,The Matrix,Movie
 APPEAR_IN,name,Agent Smith,Character|ComputerProgram,name,The Matrix,Movie,enemy
 APPEAR_IN,name,Machine City,City,name,The Matrix,Movie,place
 APPEAR_IN,name,The Matrix,VirtualRealityWorld,name,The Matrix,Movie,virtual world
-IS_PLAYED_BY,name,Mouse,Character|Person,name,Matt Doran,Person,
-IS_PLAYED_BY,name,Neo,Character|Person,name,Keanu Reeves,Person,
-IS_PLAYED_BY,name,Morpheus,Character|Person,name,Laurence Fishburne,Person,
-IS_PLAYED_BY,name,Dozer,Character|Person,name,Anthony Ray Parker,Person,
-IS_PLAYED_BY,name,Trinity,Character|Person,name,Carrie-Anne Moss,Person,
-IS_PLAYED_BY,name,Oracle,Character|ComputerProgram,name,Gloria Foster,Person,
-IS_PLAYED_BY,name,Oracle,Character|ComputerProgram,name,Mary Alice,Person,
-IS_PLAYED_BY,name,Architect,Character|ComputerProgram,name,Helmut Bakaitis,Person,
-IS_PLAYED_BY,name,Agent Smith,Character|ComputerProgram,name,Hugo Weaving,Person,
 IS_CREW_OF,name,Mouse,Character|Person,name,Nebuchadnezzar,Vehicle|Battleship,
 IS_CREW_OF,name,Neo,Character|Person,name,Nebuchadnezzar,Vehicle|Battleship,
 IS_CREW_OF,name,Morpheus,Character|Person,name,Nebuchadnezzar,Vehicle|Battleship,captain
