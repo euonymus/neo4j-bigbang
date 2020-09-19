@@ -58,7 +58,7 @@ class RelationshipFrame:
     target_values_out = 'hoge|hage'
     type = 'MY_REL_TYPE'
     properties = {}
-    directed = True
+    # directed = True
          
 def test_invoke(mocker):
     # Mock NodeRepository

@@ -29,20 +29,21 @@ class Relationship(Neo4jInstance):
     def node2(self):
         return self.__node2
 
-    @property
-    def directed(self):
-        pass
+    # @property
+    # def directed(self):
+    #     pass
 
-    @directed.getter
-    def directed(self):
-        return self.__directed
+    # @directed.getter
+    # def directed(self):
+    #     return self.__directed
 
     """
     Constructor
     """
-    def __init__(self, rel_type, node1, node2, properties = {}, directed = False):
+    # def __init__(self, rel_type, node1, node2, properties = {}, directed = False):
+    def __init__(self, rel_type, node1, node2, properties = {}):
         self.__type = rel_type
         self.__node1 = node1
         self.__node2 = node2
-        self.__directed = directed
+        # self.__directed = directed
         super().__init__(properties)

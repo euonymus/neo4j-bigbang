@@ -26,8 +26,9 @@ def test_init(test_data):
     target_values_in = 'hage'
     target_fields_out = 'foo'
     target_values_out = 'bar'
-    directed = True
-    relationship = RelationshipFrame(rel_type, target_fields_in, target_values_in, target_fields_out, target_values_out, properties = test_data, directed = directed)
+    # directed = True
+    # relationship = RelationshipFrame(rel_type, target_fields_in, target_values_in, target_fields_out, target_values_out, properties = test_data, directed = directed)
+    relationship = RelationshipFrame(rel_type, target_fields_in, target_values_in, target_fields_out, target_values_out, properties = test_data)
 
     assert relationship.type == rel_type
     assert relationship.target_fields_in == target_fields_in
@@ -46,4 +47,4 @@ def test_init(test_data):
     assert 'none_key' not in relationship.properties
     assert isinstance(relationship.properties['created'], entities.neo4j_property_datetime.Neo4jPropertyDatetime)
     assert isinstance(relationship.properties['modified'], entities.neo4j_property_datetime.Neo4jPropertyDatetime)
-    assert relationship.directed
+    # assert relationship.directed

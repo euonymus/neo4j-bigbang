@@ -22,5 +22,4 @@ SAMPLE_CSV_DATA_PATH_FILENAME = 'tests/data/MY_REL_TYPE.csv'
 #         print(re.type)
 #         print(re.node1.properties)
 #         print(re.node2.properties)
-#         print(re.directed)
 #         print(re.properties) # TODO: properties がうまくセットされない！！！　なんでや。

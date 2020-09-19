@@ -52,13 +52,17 @@ class ActivateRelationship():
         for key, property in self.relationship_frame.properties.items():
             properties[key] = property.value
 
-        directed = self.relationship_frame.directed
+        # directed = self.relationship_frame.directed
 
-        return self.generate_relationship(rel_type, node1, node2, properties, directed)
+        # return self.generate_relationship(rel_type, node1, node2, properties, directed)
+        return self.generate_relationship(rel_type, node1, node2, properties)
 
+    # @staticmethod
+    # def generate_relationship(rel_type, node1, node2, properties, directed):
+    #     return Relationship(rel_type, node1, node2, properties, directed)
     @staticmethod
-    def generate_relationship(rel_type, node1, node2, properties, directed):
-        return Relationship(rel_type, node1, node2, properties, directed)
+    def generate_relationship(rel_type, node1, node2, properties):
+        return Relationship(rel_type, node1, node2, properties)
 
     def search_and_convert_target_into_node(self, target_fields, target_values, labels = []):
         tmp_properties = self.convert_target_into_condition(target_fields, target_values)

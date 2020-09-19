@@ -24,8 +24,9 @@ def test_init(test_data):
     rel_type = 'RELTYPE'
     node1 = 'dummy'
     node2 = 'dummy'
-    directed = True
-    relationship = Relationship(rel_type, node1, node2, properties = test_data, directed = directed)
+    # directed = True
+    # relationship = Relationship(rel_type, node1, node2, properties = test_data, directed = directed)
+    relationship = Relationship(rel_type, node1, node2, properties = test_data)
 
     assert relationship.type == rel_type
     assert isinstance(relationship.properties['int_key'], entities.neo4j_property_int.Neo4jPropertyInt)
@@ -40,4 +41,4 @@ def test_init(test_data):
     assert 'none_key' not in relationship.properties
     assert isinstance(relationship.properties['created'], entities.neo4j_property_datetime.Neo4jPropertyDatetime)
     assert isinstance(relationship.properties['modified'], entities.neo4j_property_datetime.Neo4jPropertyDatetime)
-    assert relationship.directed
+    # assert relationship.directed

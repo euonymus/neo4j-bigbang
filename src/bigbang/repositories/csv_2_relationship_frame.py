@@ -48,15 +48,15 @@ class Csv2RelationshipFrame(Csv2Pandas):
             print('[Skip the Row] target_values_out is required')
             return False
 
-        if 'directed' not in row:
-            print('[Skip the Row] directed is required')
-            return False
+        # if 'directed' not in row:
+        #     print('[Skip the Row] directed is required')
+        #     return False
 
         target_fields_in = cls.property(row.pop('target_fields_in'))
         target_values_in = cls.property(row.pop('target_values_in'))
         target_fields_out = cls.property(row.pop('target_fields_out'))
         target_values_out = cls.property(row.pop('target_values_out'))
-        directed = cls.property(row.pop('directed'))
+        # directed = cls.property(row.pop('directed'))
 
         target_labels_in = []
         if 'target_labels_in' in row:
@@ -74,4 +74,5 @@ class Csv2RelationshipFrame(Csv2Pandas):
         for key, value in row.iteritems():
             __properties[key] = cls.property(value)
 
-        return RelationshipFrame(rel_type, target_fields_in, target_values_in, target_fields_out, target_values_out, properties = __properties, directed = directed, target_labels_in = target_labels_in, target_labels_out = target_labels_out)
+        # return RelationshipFrame(rel_type, target_fields_in, target_values_in, target_fields_out, target_values_out, properties = __properties, directed = directed, target_labels_in = target_labels_in, target_labels_out = target_labels_out)
+        return RelationshipFrame(rel_type, target_fields_in, target_values_in, target_fields_out, target_values_out, properties = __properties, target_labels_in = target_labels_in, target_labels_out = target_labels_out)
