@@ -47,10 +47,10 @@ $ source .env/bin/activate
 $ pip install -r requirements.txt
 ```
 
-Setup your .env file under `bigbang` directory
+Setup your .env file under `src/bigbang` directory
 
 
-/bigbang/.env
+/src/bigbang/.env
 ```
 NEO4J_URI='bolt://localhost:7687'
 NEO4J_USER='neo4j'
@@ -62,16 +62,16 @@ NEO4J_PASSWORD='password'
 Run
 
 ```bash
-$ python bigbang/import_nodes.py
+$ python src/bigbang/import_nodes.py
 
 # Case 1: Use Labels from file name Person|Employee.csv
-$ python bigbang/import_nodes.py -n Person|Employee.csv -f
+$ python src/bigbang/import_nodes.py -n Person|Employee.csv -f
 
 # Case 2: Update if target node already exists
-$ python bigbang/import_nodes.py -n Person|Employee.csv -f -l Person|Teacher -p name|employee_id -u
+$ python src/bigbang/import_nodes.py -n Person|Employee.csv -f -l Person|Teacher -p name|employee_id -u
 
 # Case 3: Skip if target node already exists
-$ python bigbang/import_nodes.py -n Person|Employee.csv -f -l Person|Teacher -p name|employee_id
+$ python src/bigbang/import_nodes.py -n Person|Employee.csv -f -l Person|Teacher -p name|employee_id
 ```
 
 Options
@@ -88,16 +88,16 @@ Options
 Run
 
 ```bash
-$ python bigbang/import_relationships.py
+$ python src/bigbang/import_relationships.py
 
 # Case 1: Use Type from file name YOUR_RELATION_TYPE.csv
-$ python bigbang/import_relationships.py -n YOUR_RELATION_TYPE.csv -f
+$ python src/bigbang/import_relationships.py -n YOUR_RELATION_TYPE.csv -f
 
 # Case 2: Update if same type relationship already exists
-$ python bigbang/import_relationships.py -u
+$ python src/bigbang/import_relationships.py -u
 
 # Case 3: Create relationship and nodes at once, even though nodes does not exist
-$ python bigbang/import_relationships.py -c
+$ python src/bigbang/import_relationships.py -c
 ```
 
 Options
