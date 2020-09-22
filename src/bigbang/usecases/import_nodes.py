@@ -3,6 +3,7 @@ from repositories.node import NodeRepository
 
 ACTION_TYPE_SKIP = 'skip'
 ACTION_TYPE_UPDATE = 'update'
+ACTION_TYPE_INSERT = 'insert'
 
 class ImportNodes():
     @property
@@ -53,7 +54,6 @@ class ImportNodes():
         # self.node_repository = NodeRepository(unique_labels, unique_property_keys)
 
     def invoke(self, action_type = ACTION_TYPE_SKIP):
-
         csv_2_node = Csv2Node(self.node_file_path, self.labels_in_row)
         csv_nodes = csv_2_node.nodes()
         
@@ -63,20 +63,21 @@ class ImportNodes():
                 print('action failed.', node, action_type)
 
     def action(self, node, action_type):
+        if action_type == ACTION_TYPE_INSERT:
+            node_repository = NodeRepository()
+            return node_repository.create(node)
 
         if self.unique_labels is True:
             unique_labels = node.labels
         else:
-            unique_labels = self.unique_labels
+            unique_labels = self.unique_labels if self.unique_labels else []
 
         node_repository = NodeRepository(unique_labels, self.unique_property_keys)
-        if self.unique_labels is None or self.unique_property_keys is None:
-            return node_repository.create(node)
-
         target_labels = node_repository.unique_labels
         target_properties = {}
         for key in node_repository.unique_property_keys:
             if key not in node.properties:
+                print('[Skip the Row] Target property %s does not exist in the provided CSV.' % key)
                 return False
             target_properties[key] = node.properties[key]
 
