@@ -13,14 +13,15 @@ class Csv2RelationshipFrame(Csv2Pandas):
     def relationship_frames(self):
         self.fetch()
 
-        rel_type = ''
-        if not self.type_in_row:
-            rel_type = self.file_name
-
         ret = []
         for index, row in self.df.iterrows():
-            if self.type_in_row and 'type' in row:
+            rel_type = ''
+            if not self.type_in_row:
+                rel_type = self.file_name
+            elif 'type' in row:
                 rel_type = str(row.pop('type'))
+            else:
+                print('[Skip the Row] Relationship Type is not specified.')
 
             entity = self.to_entity(row, rel_type)
             if not entity:
