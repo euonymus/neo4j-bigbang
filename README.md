@@ -98,7 +98,7 @@ Run
 $ python src/bigbang/import_relationships.py
 
 # Case 1: Use Type from file name YOUR_RELATION_TYPE.csv
-$ python src/bigbang/import_relationships.py -n YOUR_RELATION_TYPE.csv -f
+$ python src/bigbang/import_relationships.py -n YOUR_RELATION_TYPE.csv -a
 
 # Case 2: Update if same type relationship already exists
 $ python src/bigbang/import_relationships.py -u
@@ -110,7 +110,7 @@ $ python src/bigbang/import_relationships.py -c
 Options
 
 - `-u` : If set, update relationship when it exists
-- `-n` : Specify CSV file name. Its' required when you set `-f`
-- `-f` : Set if you want to use file name as relationship type. If not set, type field is required in the CSV file
+- `-n` : Specify CSV file name. Its' required when you set `-a`
+- `-a` : Set if you want to use file name as relationship type. If not set, type field is required in the CSV file
 - `-c` : If you want to create nodes at the same time, use this option
 

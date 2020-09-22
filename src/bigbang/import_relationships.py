@@ -25,7 +25,7 @@ def main(args = sys.argv):
         if args[i + 1].startswith('-'):
             raise AttributeError('file_name is required.')
         file_name = args[i + 1]
-        if '-f' in args:
+        if '-a' in args:
             type_in_row = False
 
     # Create Node if not exists
