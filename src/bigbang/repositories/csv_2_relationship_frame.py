@@ -17,11 +17,12 @@ class Csv2RelationshipFrame(Csv2Pandas):
         for index, row in self.df.iterrows():
             rel_type = ''
             if not self.type_in_row:
+                # TODO: File name should be sanitized
                 rel_type = self.file_name
             elif 'type' in row:
                 rel_type = str(row.pop('type'))
             else:
-                print('[Skip the Row] Relationship Type is not specified.')
+                raise RuntimeError('Relationship Type is not specified.')
 
             entity = self.to_entity(row, rel_type)
             if not entity:
