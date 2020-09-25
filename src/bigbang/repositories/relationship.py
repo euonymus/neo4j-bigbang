@@ -4,9 +4,6 @@ from repositories.node import NodeRepository
 from entities.node import Node
 from entities.relationship import Relationship
 
-
-
-
 NODE1_INDICATOR = 'n1'
 NODE2_INDICATOR = 'n2'
 RELATIONSHIP_INDICATOR = 'r'
