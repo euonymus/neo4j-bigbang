@@ -186,6 +186,10 @@ class NodeRepository():
                 filter += ', '
             filter += property.encypher()
 
-        labels_str = "" if len(labels) == 0 else ':%s' % ":".join(labels)
+        if (not isinstance(labels, list)) or (len(labels) == 0):
+            labels_str = ""
+        else:
+            labels_str = ':%s' % ":".join(labels)
+
         return '(node%s {%s})' % (labels_str, filter)
 
