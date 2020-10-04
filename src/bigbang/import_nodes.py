@@ -48,7 +48,7 @@ def main(args = sys.argv):
                 raise AttributeError('Unique labels are required.')
 
             labels = args[i + 1]
-            unique_labels = labels.split('|')
+            unique_labels = list(filter(lambda a: a != '', str(labels).split('|')))
 
         # unique property keys
         if '-p' in args:
@@ -58,7 +58,7 @@ def main(args = sys.argv):
             if args[i + 1].startswith('-'):
                 raise AttributeError('Unique property keys are required.')
             property_keys = args[i + 1]
-            unique_property_keys = property_keys.split('|')
+            unique_property_keys = list(filter(lambda a: a != '', str(property_keys).split('|')))
 
     try:
         import_nodes = ImportNodes(file_name, labels_in_row, unique_labels, unique_property_keys)

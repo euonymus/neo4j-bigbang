@@ -15,13 +15,13 @@ class Csv2Node(Csv2Pandas):
 
         labels = []
         if not self.labels_in_row:
-            labels = self.file_name.split('|')
+            labels = list(filter(lambda a: a != '', str(self.file_name).split('|')))
 
         ret = []
         for index, row in self.df.iterrows():
             if self.labels_in_row and 'labels' in row:
                 labels_raw = row.pop('labels')
-                labels = labels_raw.split('|')
+                labels = list(filter(lambda a: a != '', str(labels_raw).split('|')))
 
             ret.append(self.to_entity(row, labels))
 

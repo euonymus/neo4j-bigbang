@@ -66,14 +66,14 @@ class Csv2Relationship(Csv2Pandas):
         if 'target_labels_in' in row:
             tmp = cls.property(row.pop('target_labels_in'))
             if tmp:
-                target_labels_in = str(tmp).split('|')
+                target_labels_in = list(filter(lambda a: a != '', str(tmp).split('|')))
                 print(target_labels_in)
 
         target_labels_out = []
         if 'target_labels_out' in row:
             tmp = cls.property(row.pop('target_labels_out'))
             if tmp:
-                target_labels_out = str(tmp).split('|')
+                target_labels_out = list(filter(lambda a: a != '', str(tmp).split('|')))
 
         node1 = cls.convert_target_into_node(target_fields_in, target_values_in, target_labels_in)
         node2 = cls.convert_target_into_node(target_fields_out, target_values_out, target_labels_out)
@@ -94,17 +94,41 @@ class Csv2Relationship(Csv2Pandas):
 
         return  Node(labels, properties)
 
-    @staticmethod
-    def convert_target_into_condition(target_fields, target_values):
-        property_keys = target_fields.split('|')
-        property_values = target_values.split('|')
+    @classmethod
+    def convert_target_into_condition(cls, target_fields, target_values):
+        property_keys = list(filter(lambda a: a != '', str(target_fields).split('|')))
+        property_values = list(filter(lambda a: a != '', str(target_values).split('|')))
         if len(property_keys) != len(property_values):
             return False
 
         target_properties = {}
         for index, property_key in enumerate(property_keys):
-            target_properties[property_key] = property_values[index]
+
+            target_properties[property_key] = cls.generalization(property_values[index])
 
         return target_properties
 
-    
+    @classmethod
+    def generalization(cls, s):
+        if (cls.is_int(s)):
+            return int(s)
+        elif (cls.is_float(s)):
+            return float(s)
+
+        return s
+
+    @staticmethod
+    def is_int(s):
+        try:
+            int(s)
+            return True
+        except ValueError:
+            return False
+
+    @staticmethod
+    def is_float(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
