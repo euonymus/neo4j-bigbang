@@ -77,7 +77,7 @@ class RelationshipRepository():
         node_result = node_repository.find_by(labels1, tmp_properties1)
         if len(node_result) == 0:
             if not self.create_node:
-                print('[SKIP]: No node was found attempting to create relationship.')
+                print('[Skip the Row] Target Node is not found ')
                 return False
 
             node_repository = NodeRepository()

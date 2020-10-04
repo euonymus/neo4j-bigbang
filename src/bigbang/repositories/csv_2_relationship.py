@@ -3,7 +3,7 @@ from repositories.csv_2_pandas import Csv2Pandas
 from entities.relationship import Relationship
 from entities.node import Node
 
-class Csv2RelationshipFrame(Csv2Pandas):
+class Csv2Relationship(Csv2Pandas):
 
     """
     Constructor

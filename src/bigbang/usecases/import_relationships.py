@@ -1,5 +1,5 @@
 # from business_rules.activate_relationship_frames import ActivateRelationships
-from repositories.csv_2_relationship_frame import Csv2RelationshipFrame
+from repositories.csv_2_relationship import Csv2Relationship
 from repositories.relationship import RelationshipRepository
 
 ACTION_TYPE_SKIP = 'skip'
@@ -43,8 +43,8 @@ class ImportRelationships():
     def invoke(self, action_type = ACTION_TYPE_SKIP):
         # MEMO: ActivateRelationships にて create_node するか決めているけど、 RelationshipRepository にてやる方がいいかも。
         # activate_relationships = ActivateRelationships(self.relationship_file_path, self.type_in_row, self.create_node)
-        csv_2_relationship_frames = Csv2RelationshipFrame(self.relationship_file_path, self.type_in_row)
-        csv_relationships = csv_2_relationship_frames.relationships()
+        csv_2_relationships = Csv2Relationship(self.relationship_file_path, self.type_in_row)
+        csv_relationships = csv_2_relationships.relationships()
         
         for relationship in csv_relationships:
             result = self.action(relationship, action_type)
