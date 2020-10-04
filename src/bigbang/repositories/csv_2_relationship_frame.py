@@ -1,5 +1,7 @@
 from repositories.csv_2_pandas import Csv2Pandas
-from entities.relationship_frame import RelationshipFrame
+# from entities.relationship_frame import RelationshipFrame
+from entities.relationship import Relationship
+from entities.node import Node
 
 class Csv2RelationshipFrame(Csv2Pandas):
 
@@ -10,7 +12,7 @@ class Csv2RelationshipFrame(Csv2Pandas):
         self.file_path = file_path
         self.type_in_row = type_in_row
 
-    def relationship_frames(self):
+    def relationships(self):
         self.fetch()
 
         ret = []
@@ -65,6 +67,7 @@ class Csv2RelationshipFrame(Csv2Pandas):
             tmp = cls.property(row.pop('target_labels_in'))
             if tmp:
                 target_labels_in = str(tmp).split('|')
+                print(target_labels_in)
 
         target_labels_out = []
         if 'target_labels_out' in row:
@@ -72,9 +75,36 @@ class Csv2RelationshipFrame(Csv2Pandas):
             if tmp:
                 target_labels_out = str(tmp).split('|')
 
+        node1 = cls.convert_target_into_node(target_fields_in, target_values_in, target_labels_in)
+        node2 = cls.convert_target_into_node(target_fields_out, target_values_out, target_labels_out)
+
         __properties = {}
         for key, value in row.iteritems():
             __properties[key] = cls.property(value)
 
         # return RelationshipFrame(rel_type, target_fields_in, target_values_in, target_fields_out, target_values_out, properties = __properties, directed = directed, target_labels_in = target_labels_in, target_labels_out = target_labels_out)
-        return RelationshipFrame(rel_type, target_fields_in, target_values_in, target_fields_out, target_values_out, properties = __properties, target_labels_in = target_labels_in, target_labels_out = target_labels_out)
+        return Relationship(rel_type, node1, node2, properties = __properties)
+        # return RelationshipFrame(rel_type, target_fields_in, target_values_in, target_fields_out, target_values_out, properties = __properties, target_labels_in = target_labels_in, target_labels_out = target_labels_out)
+
+    @classmethod
+    def convert_target_into_node(cls, target_fields, target_values, labels = []):
+        properties = cls.convert_target_into_condition(target_fields, target_values)
+        if not properties:
+            return False
+
+        return  Node(labels, properties)
+
+    @staticmethod
+    def convert_target_into_condition(target_fields, target_values):
+        property_keys = target_fields.split('|')
+        property_values = target_values.split('|')
+        if len(property_keys) != len(property_values):
+            return False
+
+        target_properties = {}
+        for index, property_key in enumerate(property_keys):
+            target_properties[property_key] = property_values[index]
+
+        return target_properties
+
+    

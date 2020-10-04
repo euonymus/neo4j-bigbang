@@ -1,4 +1,5 @@
-from business_rules.activate_relationship_frames import ActivateRelationships
+# from business_rules.activate_relationship_frames import ActivateRelationships
+from repositories.csv_2_relationship_frame import Csv2RelationshipFrame
 from repositories.relationship import RelationshipRepository
 
 ACTION_TYPE_SKIP = 'skip'
@@ -37,12 +38,13 @@ class ImportRelationships():
 
         # MEMO: RelationshipRepository でも create_node するかの制御ができるように実装しているけど、
         #       この shell では、ActivateRelationships で制御している。
-        self.relationship_repository = RelationshipRepository(self.create_node)
+        # self.relationship_repository = RelationshipRepository(self.create_node)
 
     def invoke(self, action_type = ACTION_TYPE_SKIP):
         # MEMO: ActivateRelationships にて create_node するか決めているけど、 RelationshipRepository にてやる方がいいかも。
-        activate_relationships = ActivateRelationships(self.relationship_file_path, self.type_in_row, self.create_node)
-        csv_relationships = activate_relationships.invoke()
+        # activate_relationships = ActivateRelationships(self.relationship_file_path, self.type_in_row, self.create_node)
+        csv_2_relationship_frames = Csv2RelationshipFrame(self.relationship_file_path, self.type_in_row)
+        csv_relationships = csv_2_relationship_frames.relationships()
         
         for relationship in csv_relationships:
             result = self.action(relationship, action_type)
@@ -50,10 +52,11 @@ class ImportRelationships():
                 print('action failed.', relationship, action_type)
 
     def action(self, relationship, action_type):
-        existing = self.relationship_repository.find_one(relationship)
+        relationship_repository = RelationshipRepository(self.create_node)
+        existing = relationship_repository.find_one(relationship)
         if existing and action_type == ACTION_TYPE_SKIP:
             print('[Skip the Row] The relationship already exists in neo4j.')
             return existing
 
-        return self.relationship_repository.save(relationship)
+        return relationship_repository.save(relationship)
             
