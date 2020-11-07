@@ -63,6 +63,12 @@ def main(args = sys.argv):
     try:
         import_nodes = ImportNodes(file_name, labels_in_row, unique_labels, unique_property_keys)
         import_nodes.invoke(action_type)
+        print('[Treated results]')
+        print('created: %s' % (import_nodes.treated["created"]))
+        print('updated: %s' % (import_nodes.treated["updated"]))
+        print('skipped: %s' % (import_nodes.treated["skipped"]))
+        print('failed: %s' % (import_nodes.treated["failed"]))
+
     except Exception as e:
         print(e)
 

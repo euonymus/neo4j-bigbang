@@ -31,6 +31,7 @@ class NodeRepository():
         return self.__unique_property_keys
 
     def __init__(self, unique_labels = None, unique_property_keys = None):
+        self.last_action = None
         if (not isinstance(unique_labels, list)) or (len(unique_labels) == 0):
             unique_labels = None
         self.__unique_labels = unique_labels
@@ -76,6 +77,7 @@ class NodeRepository():
         labels_str = "" if len(node.labels) == 0 else ':%s' % ":".join(node.labels)
         cypher = "CREATE (n%s %s) RETURN n" % (labels_str, node.encypher(with_bracket = True))
         result = self.neo4j.exec_write_cypher(cypher)
+        self.last_action = 'created'
         return result
 
         # if not result:
@@ -106,6 +108,7 @@ class NodeRepository():
         """
         existing = self.find_by(target_labels, target_properties)
         if not existing:
+            self.last_action = 'skipped'
             return None
 
         update_label_pre = ''
@@ -124,6 +127,7 @@ class NodeRepository():
         match_clause = self.build_match_clause(target_labels, target_properties)
         cypher = 'MATCH %s %s SET node %s= %s %s RETURN node' % (match_clause, update_label_pre, update_prefix, node.encypher(with_bracket = True), update_label_post)
         result = self.neo4j.exec_write_cypher(cypher)
+        self.last_action = 'updated'
         return result
 
 

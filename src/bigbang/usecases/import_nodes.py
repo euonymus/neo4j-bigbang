@@ -40,6 +40,12 @@ class ImportNodes():
 
 
     def __init__(self, file_name, labels_in_row = True, unique_labels = None, unique_property_keys = None):
+        self.treated = {
+            "created": 0,
+            "updated": 0,
+            "skipped": 0,
+            "failed": 0
+        }
         self.__node_file_path = 'importing/%s' % file_name
         self.__labels_in_row = labels_in_row
 
@@ -65,7 +71,13 @@ class ImportNodes():
     def action(self, node, action_type):
         if action_type == ACTION_TYPE_INSERT:
             node_repository = NodeRepository()
-            return node_repository.create(node)
+            created = node_repository.create(node)
+            if not created or not node_repository.last_action:
+                self.treated["failed"] += 1
+            else:
+                self.treated[node_repository.last_action] += 1
+
+            return created
 
         if self.unique_labels is True:
             unique_labels = node.labels
@@ -83,8 +95,15 @@ class ImportNodes():
 
         existing = node_repository.find_one_by(target_labels, properties = target_properties)
         if existing and action_type == ACTION_TYPE_SKIP:
+            self.treated["skipped"] += 1
             print('[Skip the Row] Target %s already exists in neo4j.' % (target_properties))
             return existing
 
-        return node_repository.save(node)
+        saved = node_repository.save(node)
+        if not saved or not node_repository.last_action:
+            self.treated["failed"] += 1
+        else:
+            self.treated[node_repository.last_action] += 1
+
+        return saved
             
