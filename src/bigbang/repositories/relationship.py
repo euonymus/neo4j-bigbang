@@ -29,6 +29,7 @@ class RelationshipRepository():
         return self.__create_node
 
     def __init__(self, create_node = False):
+        self.last_action = None
         neo4j_uri   = os.environ.get("NEO4J_URI")
         neo4j_user   = os.environ.get("NEO4J_USER")
         neo4j_password   = os.environ.get("NEO4J_PASSWORD")
@@ -66,6 +67,7 @@ class RelationshipRepository():
     def create(self, relationship):
         existing = self.find_one(relationship)
         if existing:
+            self.last_action = 'skipped'
             print('[SKIP]: There is already a same relationship between attempting nodes.')
             return
 
@@ -77,12 +79,14 @@ class RelationshipRepository():
         node_result = node_repository.find_by(labels1, tmp_properties1)
         if len(node_result) == 0:
             if not self.create_node:
+                self.last_action = 'skipped'
                 print('[Skip the Row] Target Node is not found ')
                 return False
 
             node_repository = NodeRepository()
             node_repository.create(node1)
         elif len(node_result) != 1:
+            self.last_action = 'skipped'
             print('[SKIP]: It can not create relationships among multiple nodes.')
             return False
                     
@@ -94,12 +98,14 @@ class RelationshipRepository():
         node_result = node_repository.find_by(labels2, tmp_properties2)
         if len(node_result) == 0:
             if not self.create_node:
+                self.last_action = 'skipped'
                 print('[SKIP]: No node was found attempting to create relationship.')
                 return False
 
             node_repository = NodeRepository()
             node_repository.create(node2)
         elif len(node_result) != 1:
+            self.last_action = 'skipped'
             print('[SKIP]: It can not create relationships among multiple nodes.')
             return False
 
@@ -115,6 +121,7 @@ class RelationshipRepository():
         cypher = "MATCH %s, %s CREATE (%s)-[r%s %s]-%s(%s) RETURN r" % (match_clause_node1, match_clause_node2, NODE1_INDICATOR, type_str, relation_props, directed_str, NODE2_INDICATOR)
 
         result = self.neo4j.exec_write_cypher(cypher)
+        self.last_action = 'created'
         return result
 
 
@@ -123,6 +130,7 @@ class RelationshipRepository():
     def update(self, relationship, nicely = True):
         existing = self.find_one(relationship)
         if not existing:
+            self.last_action = 'skipped'
             return None
 
         rel_type = relationship.type
@@ -143,6 +151,7 @@ class RelationshipRepository():
         update_prefix = '+' if nicely else ''
         cypher = 'MATCH %s-[%s:%s]->%s SET %s %s= %s RETURN %s' % (match_clause_node1, RELATIONSHIP_INDICATOR, rel_type, match_clause_node2, RELATIONSHIP_INDICATOR, update_prefix, setting_properties, RELATIONSHIP_INDICATOR)
         result = self.neo4j.exec_write_cypher(cypher)
+        self.last_action = 'updated'
         return result
 
 

@@ -36,6 +36,12 @@ def main(args = sys.argv):
     try:
         import_relationships = ImportRelationships(file_name, type_in_row, create_node)
         import_relationships.invoke(action_type)
+        print('[Treated results]')
+        print('created: %s' % (import_relationships.treated["created"]))
+        print('updated: %s' % (import_relationships.treated["updated"]))
+        print('skipped: %s' % (import_relationships.treated["skipped"]))
+        print('failed: %s' % (import_relationships.treated["failed"]))
+
     except Exception as e:
         print(e)
 

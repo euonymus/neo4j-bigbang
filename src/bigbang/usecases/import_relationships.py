@@ -32,6 +32,12 @@ class ImportRelationships():
         return self.__create_node
 
     def __init__(self, file_name, type_in_row = True, create_node = False):
+        self.treated = {
+            "created": 0,
+            "updated": 0,
+            "skipped": 0,
+            "failed": 0
+        }
         self.__relationship_file_path = 'importing/%s' % file_name
         self.__type_in_row = type_in_row
         self.__create_node = create_node
@@ -58,5 +64,11 @@ class ImportRelationships():
             print('[Skip the Row] The relationship already exists in neo4j.')
             return existing
 
-        return relationship_repository.save(relationship)
+        saved = relationship_repository.save(relationship)
+        if not saved or not relationship_repository.last_action:
+            self.treated["failed"] += 1
+        else:
+            self.treated[relationship_repository.last_action] += 1
+
+        return saved
             
