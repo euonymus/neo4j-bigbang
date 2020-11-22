@@ -37,6 +37,11 @@ Put your importing CSV file under `importing` directory
 NEO4J_URI=bolt://localhost:7687 NEO4J_USER=neo4j NEO4J_PASSWORD={your-password} bigbang-node
 ```
 
+## Or set envilonment variable
+```
+export NEO4J_URI=bolt://localhost:7687 NEO4J_USER=neo4j NEO4J_PASSWORD=password
+```
+
 
 # Getting Started from source
 
