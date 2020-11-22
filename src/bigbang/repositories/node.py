@@ -111,17 +111,7 @@ class NodeRepository():
             self.last_action = 'skipped'
             return None
 
-        update_label_pre = ''
-        update_label_post = ''
-
-        result = True
-        # Set型にする事で、順番を意識しない集合として比較する
-        if node.labels and set(node.labels) != set(existing[0].labels):
-            current_labels_str = ":".join(existing[0].labels)
-            new_labels_str = ":".join(node.labels)
-
-            update_label_pre = ' REMOVE node:%s' % current_labels_str
-            update_label_post = ', node:%s' % new_labels_str
+        update_label_pre, update_label_post = self.build_label_clause(node.labels, existing[0].labels)
 
         update_prefix = '+' if nicely else ''
         match_clause = self.build_match_clause(target_labels, target_properties)
@@ -134,7 +124,6 @@ class NodeRepository():
         result = self.neo4j.exec_write_cypher(cypher)
         self.last_action = 'updated'
         return result
-
 
     def save(self, node):
         """
@@ -201,4 +190,21 @@ class NodeRepository():
             labels_str = ':%s' % ":".join(labels)
 
         return '(node%s {%s})' % (labels_str, filter)
+
+    @staticmethod
+    def build_label_clause(new_labels, current_labels):
+        update_label_pre = ''
+        update_label_post = ''
+
+        result = True
+        # Set型にする事で、順番を意識しない集合として比較する
+        if new_labels and set(new_labels) != set(current_labels):
+            current_labels_str = ":".join(current_labels)
+            new_labels_str = ":".join(new_labels)
+
+            update_label_pre = ' REMOVE node:%s' % current_labels_str
+            update_label_post = ', node:%s' % new_labels_str
+        
+        return update_label_pre, update_label_post
+
 
