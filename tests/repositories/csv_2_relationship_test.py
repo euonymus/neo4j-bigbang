@@ -33,7 +33,7 @@ def test_to_entity(rel_type, properties, expected):
     assert result.type == rel_type
     assert isinstance(result.properties['col1'], entities.neo4j_property_int.Neo4jPropertyInt)
     assert isinstance(result.properties['col2'], entities.neo4j_property_str.Neo4jPropertyStr)
-    assert 'col3' not in result.properties
+    assert isinstance(result.properties['col3'], entities.neo4j_property_null.Neo4jPropertyNull)
     
 def test_relationships():
     # Case 1: from File Name

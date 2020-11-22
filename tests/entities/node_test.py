@@ -34,7 +34,7 @@ def test_init(test_data):
     assert node.properties['bool_false_key'].value == False
     assert isinstance(node.properties['date_key'], entities.neo4j_property_date.Neo4jPropertyDate)
     assert isinstance(node.properties['datetime_key'], entities.neo4j_property_datetime.Neo4jPropertyDatetime)
-    assert 'none_key' not in node.properties
+    assert isinstance(node.properties['none_key'], entities.neo4j_property_null.Neo4jPropertyNull)
     assert isinstance(node.properties['created'], entities.neo4j_property_datetime.Neo4jPropertyDatetime)
     assert isinstance(node.properties['modified'], entities.neo4j_property_datetime.Neo4jPropertyDatetime)
 

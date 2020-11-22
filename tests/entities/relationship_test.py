@@ -38,7 +38,7 @@ def test_init(test_data):
     assert relationship.properties['bool_false_key'].value == False
     assert isinstance(relationship.properties['date_key'], entities.neo4j_property_date.Neo4jPropertyDate)
     assert isinstance(relationship.properties['datetime_key'], entities.neo4j_property_datetime.Neo4jPropertyDatetime)
-    assert 'none_key' not in relationship.properties
+    assert isinstance(relationship.properties['none_key'], entities.neo4j_property_null.Neo4jPropertyNull)
     assert isinstance(relationship.properties['created'], entities.neo4j_property_datetime.Neo4jPropertyDatetime)
     assert isinstance(relationship.properties['modified'], entities.neo4j_property_datetime.Neo4jPropertyDatetime)
     # assert relationship.directed

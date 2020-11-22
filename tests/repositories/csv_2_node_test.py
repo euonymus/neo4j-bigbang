@@ -22,7 +22,7 @@ def test_to_entity(labels, properties, expected):
     assert result.labels == labels
     assert isinstance(result.properties['col1'], entities.neo4j_property_int.Neo4jPropertyInt)
     assert isinstance(result.properties['col2'], entities.neo4j_property_str.Neo4jPropertyStr)
-    assert 'col3' not in result.properties
+    assert isinstance(result.properties['col3'], entities.neo4j_property_null.Neo4jPropertyNull)
     
 def test_nodes():
     # Case 1: from File Name

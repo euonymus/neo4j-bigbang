@@ -4,6 +4,7 @@ from entities.neo4j_property_float import Neo4jPropertyFloat
 from entities.neo4j_property_bool import Neo4jPropertyBool
 from entities.neo4j_property_date import Neo4jPropertyDate
 from entities.neo4j_property_datetime import Neo4jPropertyDatetime
+from entities.neo4j_property_null import Neo4jPropertyNull
 from datetime import datetime
 
 
@@ -39,6 +40,8 @@ def generalization(key, value):
         return Neo4jPropertyDate(key, value)
     elif Neo4jPropertyDatetime.is_datetime(value):
         return Neo4jPropertyDatetime(key, value)
+    elif Neo4jPropertyNull.is_null(value):
+        return Neo4jPropertyNull(key)
     elif Neo4jPropertyStr.is_str(value):
         return Neo4jPropertyStr(key, value)
 
