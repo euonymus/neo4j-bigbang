@@ -125,6 +125,11 @@ class NodeRepository():
 
         update_prefix = '+' if nicely else ''
         match_clause = self.build_match_clause(target_labels, target_properties)
+
+        # id 要素がある場合更新しないように properties から削除する
+        if 'id' in node.properties:
+            del node.properties['id']
+
         cypher = 'MATCH %s %s SET node %s= %s %s RETURN node' % (match_clause, update_label_pre, update_prefix, node.encypher(with_bracket = True), update_label_post)
         result = self.neo4j.exec_write_cypher(cypher)
         self.last_action = 'updated'
