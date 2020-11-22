@@ -40,12 +40,12 @@ class RelationshipRepository():
         rel_type = relationship.type
 
         node1 = relationship.node1
-        tmp_properties = self.remove_avoid_keys_from_dictionary(node1.properties, AVOID_TO_SEARCH_KEY)
-        match_clause_node1 = self.build_match_clause(node1.labels, tmp_properties, NODE1_INDICATOR)
+        tmp_properties, tmp_labels = self.remove_avoid_conditions(node1, AVOID_TO_SEARCH_KEY)
+        match_clause_node1 = self.build_match_clause(tmp_labels, tmp_properties, NODE1_INDICATOR)
 
         node2 = relationship.node2
-        tmp_properties = self.remove_avoid_keys_from_dictionary(node2.properties, AVOID_TO_SEARCH_KEY)
-        match_clause_node2 = self.build_match_clause(node2.labels, tmp_properties, NODE2_INDICATOR)
+        tmp_properties, tmp_labels = self.remove_avoid_conditions(node2, AVOID_TO_SEARCH_KEY)
+        match_clause_node2 = self.build_match_clause(tmp_labels, tmp_properties, NODE2_INDICATOR)
 
         cypher = 'MATCH %s-[%s:%s]->%s RETURN %s, %s, %s' % (match_clause_node1, RELATIONSHIP_INDICATOR, rel_type, match_clause_node2, NODE1_INDICATOR, RELATIONSHIP_INDICATOR, NODE2_INDICATOR)
         result = self.neo4j.exec_read_cypher(cypher)
@@ -74,9 +74,9 @@ class RelationshipRepository():
         # Prepare node1
         node1 = relationship.node1
         labels1 = node1.labels
-        tmp_properties1 = self.remove_avoid_keys_from_dictionary(node1.properties, AVOID_TO_SEARCH_KEY)
+        tmp_properties1, tmp_labels = self.remove_avoid_conditions(node1, AVOID_TO_SEARCH_KEY)
         node_repository = NodeRepository()
-        node_result = node_repository.find_by(labels1, tmp_properties1)
+        node_result = node_repository.find_by(tmp_labels, tmp_properties1)
         if len(node_result) == 0:
             if not self.create_node:
                 self.last_action = 'skipped'
@@ -93,9 +93,9 @@ class RelationshipRepository():
         # Prepare node2
         node2 = relationship.node2
         labels2 = node2.labels
-        tmp_properties2 = self.remove_avoid_keys_from_dictionary(node2.properties, AVOID_TO_SEARCH_KEY)
+        tmp_properties2, tmp_labels = self.remove_avoid_conditions(node2, AVOID_TO_SEARCH_KEY)
         node_repository = NodeRepository()
-        node_result = node_repository.find_by(labels2, tmp_properties2)
+        node_result = node_repository.find_by(tmp_labels, tmp_properties2)
         if len(node_result) == 0:
             if not self.create_node:
                 self.last_action = 'skipped'
@@ -136,12 +136,12 @@ class RelationshipRepository():
         rel_type = relationship.type
 
         node1 = relationship.node1
-        tmp_properties = self.remove_avoid_keys_from_dictionary(node1.properties, AVOID_TO_SEARCH_KEY)
-        match_clause_node1 = self.build_match_clause(node1.labels, tmp_properties, NODE1_INDICATOR)
+        tmp_properties, tmp_labels = self.remove_avoid_conditions(node1, AVOID_TO_SEARCH_KEY)
+        match_clause_node1 = self.build_match_clause(tmp_labels, tmp_properties, NODE1_INDICATOR)
 
         node2 = relationship.node2
-        tmp_properties = self.remove_avoid_keys_from_dictionary(node2.properties, AVOID_TO_SEARCH_KEY)
-        match_clause_node2 = self.build_match_clause(node2.labels, tmp_properties, NODE2_INDICATOR)
+        tmp_properties, tmp_labels = self.remove_avoid_conditions(node2, AVOID_TO_SEARCH_KEY)
+        match_clause_node2 = self.build_match_clause(tmp_labels, tmp_properties, NODE2_INDICATOR)
 
 
         # TODO setting properties
@@ -178,12 +178,12 @@ class RelationshipRepository():
         rel_type = relationship.type
 
         node1 = relationship.node1
-        tmp_properties = self.remove_avoid_keys_from_dictionary(node1.properties, AVOID_TO_SEARCH_KEY)
-        match_clause_node1 = self.build_match_clause(node1.labels, tmp_properties, NODE1_INDICATOR)
+        tmp_properties, tmp_labels = self.remove_avoid_conditions(node1, AVOID_TO_SEARCH_KEY)
+        match_clause_node1 = self.build_match_clause(tmp_labels, tmp_properties, NODE1_INDICATOR)
 
         node2 = relationship.node2
-        tmp_properties = self.remove_avoid_keys_from_dictionary(node2.properties, AVOID_TO_SEARCH_KEY)
-        match_clause_node2 = self.build_match_clause(node2.labels, tmp_properties, NODE2_INDICATOR)
+        tmp_properties, tmp_labels = self.remove_avoid_conditions(node2, AVOID_TO_SEARCH_KEY)
+        match_clause_node2 = self.build_match_clause(tmp_labels, tmp_properties, NODE2_INDICATOR)
 
         cypher = 'MATCH %s-[%s:%s]->%s DELETE %s' % (match_clause_node1, RELATIONSHIP_INDICATOR, rel_type, match_clause_node2, RELATIONSHIP_INDICATOR)
         result = self.neo4j.exec_write_cypher(cypher)
@@ -220,13 +220,18 @@ class RelationshipRepository():
 
 
     @staticmethod
-    def remove_avoid_keys_from_dictionary(dict_object, avoids = []):
-        ret = {}
-        for key, property in dict_object.items():
+    def remove_avoid_conditions(node, avoids = [], avoid_labels = []):
+        properties = {}
+        for key, property in node.properties.items():
             if key not in avoids:
-                ret[key] = property
+                properties[key] = property
 
-        return ret
+        labels = []
+        for property in node.labels:
+            if property not in avoid_labels:
+                labels.append(property)
+
+        return properties, labels
 
     @staticmethod
     def record_properties_2_dict(record_properties):

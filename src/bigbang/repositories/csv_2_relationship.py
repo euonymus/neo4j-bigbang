@@ -76,7 +76,13 @@ class Csv2Relationship(Csv2Pandas):
                 target_labels_out = list(filter(lambda a: a != '', str(tmp).split('|')))
 
         node1 = cls.convert_target_into_node(target_fields_in, target_values_in, target_labels_in)
+        if not node1:
+            print('[Failed] Your CSV file is invalid.')
+            return False
         node2 = cls.convert_target_into_node(target_fields_out, target_values_out, target_labels_out)
+        if not node2:
+            print('[Failed] Your CSV file is invalid.')
+            return False
 
         __properties = {}
         for key, value in row.iteritems():
